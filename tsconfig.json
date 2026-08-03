@@ -1,0 +1,23 @@
+// Es un archivo que el compiler npx tsc va a buscar y va a encontrar ciertas reglas de compilación, como por ejemplo que archivos va a compilar y cuales no.
+
+{
+    "compilerOptions": {
+        "outDir": "./dist", //Una vez que lo cree ahi vamos a encontrar nuestros archivos compilados
+        "rootDir": "./src", //Le decimos que la carpeta raiz de nuestro proyecto es src, y que todo lo que este dentro de src va a ser compilado
+        "lib": ["esnext"], //Le decimos que queremos que compile con la version de JS mas nueva
+        "target": "ESNext", //este target sirve para decirle a typescript que queremos que compile nuestro codigo a una version de JS mas antigua, en este caso ES3, esto es para que nuestro codigo sea compatible con navegadores antiguos
+        "moduleResolution": "node", //moduleResolution es una opcion que le dice a typescript como va a resolver los modulos
+        "module": "NodeNext", 
+        "strict": false, //Le decimos que no queremos que compile con todas las reglas estrictas de typescript
+        //le ponemos false para que nos permita compilar sin que nos de errores, ya que si lo ponemos en true nos va a dar muchos errores y no vamos a poder compilar 
+        "sourceMap": true, //Le decimos que queremos que genere los archivos .map
+        "esModuleInterop": true, //Le decimos que queremos que compile con la version de JS mas nueva
+        "declaration": true, //Le decimos que queremos que genere los archivos .d.ts
+        "experimentalDecorators": true, //Le decimos que queremos que compile con la version de JS mas nueva los decoradores son una forma de agregar metadatos a las clases
+        "emitDecoratorMetadata": true, //esto es para que nos genere los metadatos de los decoradores, es decir, nos va a generar un archivo .d.ts con la informacion de los decoradores que tenemos en nuestro proyecto
+        
+    },
+    "include": [ "./src/**/*.ts"], //Le decimos que queremos que compile todos los archivos .ts que esten dentro de la carpeta src y sus subcarpetas
+}
+
+//De esta forma ya tenemos listo nuestro tsconfig.json para que compile nuestro proyecto de typescript a javascript.

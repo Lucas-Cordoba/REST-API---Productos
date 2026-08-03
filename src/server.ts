@@ -1,0 +1,46 @@
+import express from "express";
+import colors from "colors";
+import router from "./router";
+import db from "./config/db";
+
+//Conexion a la base de datos
+async function connectDB() {
+    try{
+        await db.authenticate() //con esto nos conectamos a la base de datos
+        db.sync() //con esto sincronizamos la base de datos, es decir, creamos las tablas si no existen
+        console.log(colors.blue.bold("Conexion exitosa a la base de datos"))
+    }catch(error){
+        // console.log(error)
+        console.log(colors.bgRed.bold("No se pudo conectar a la base de datos"))
+    }
+}
+
+connectDB() //llamamos a la funcion para conectarnos a la base de datos
+
+//Instancia de express
+const server = express(); //sobre este server se van a crear las rutas y los middlewares
+
+//Leer datos de formularios
+server.use(express.json()) //con esto le decimos a express que vamos a recibir datos en formato json
+server.use('/api/products', router)//es para decirle a nuestro server que use el router que creamos en router.ts para manejar las rutas de nuestra aplicacion
+//Routing
+// server.post('/', (req, res) => {  //req es la peticion que hace el cliente y res es la respuesta que le vamos a dar
+
+
+//     // const auth = true; //esta variable es para simular si el usuario esta logueado o no
+//     // const datos = [
+//     //     {id:1, nombre: "Juan", edad: 30},
+//     //     {id:2, nombre: "Maria", edad: 25},
+//     //     {id:3, nombre: "Pedro", edad: 35}
+//     // ]
+//     //     res.send(datos) //con send le enviamos la respuesta al cliente
+//     //     //en vez de send tambien podemos usar json para enviar un objeto json al cliente
+
+
+  
+// })
+
+
+
+//Nuestro navegador solo admite GET y POST, para poder usar los otros metodos HTTP necesitamos axios o fetch,  usar un cliente como Postman o Thunder Client
+export default server;

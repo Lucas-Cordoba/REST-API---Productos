@@ -1,0 +1,29 @@
+import {Router} from 'express' //importamos el router de express para poder manejar las rutas de nuestra aplicacion
+import { createProduct } from './handlers/product'
+import {body, validationResult} from "express-validator";  //body se usa para validar los campos en el router que no es asincrona y 
+const router = Router() //de esta manera podemos crear un router para manejar las rutas de nuestra aplicacion
+router.get('/', (req, res) => { 
+    res.json('Desde GET')
+}) 
+router.post('/', 
+    //VALIDACION EN EL ROUTER
+    body("name").notEmpty().withMessage("El nombre del producto no puede ir vacio"),//con esto validamos que el nombre del producto no este vacio, y si lo esta le enviamos un mensaje de error al cliente
+    body("price")
+            .isNumeric().withMessage("El precio del producto debe ser un número")
+            .notEmpty().withMessage("El precio del producto no puede ir vacio")
+            .custom(value => value > 0).withMessage("El precio del producto debe ser un número positivo"),
+    
+    createProduct) //aqui estamos usando la funcion createProduct que creamos en handlers/product.ts para manejar la peticion POST
+
+router.put('/', (req, res) => { 
+    res.json('Desde PUT')
+})
+router.patch('/', (req, res) => { 
+    res.json('Desde PATCH')
+})
+router.delete('/', (req, res) => { 
+    res.json('Desde DELETE')
+})
+ //con router accedemos a todas las rutas que queramos crear y con los metodos get, post, put, patch y delete podemos manejar las peticiones que nos lleguen de nuestro cliente
+
+ export default router //exportamos el router para poder usarlo en nuestro server.ts
