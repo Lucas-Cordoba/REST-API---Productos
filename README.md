@@ -158,3 +158,17 @@ sequelize-typescript es para obtener soporte de typescript en sequelize.
 Esta buena porque usa decoradores que es una sintaxis que inician con @ en diferentes lenguajes y mandan a llamar a una funcion y no modifica el codigo sino que las manda a llamar
 
 express-validators es para validaciones de datos
+
+Middleware en node
+
+Se refiere a un tipo de software intermedio que se utiliza para procesar las solicitudes HTTP que llegan a una aplicacion web antes de ser manejadas por la funcion de enrutamiento principal, en este caso el router.
+En este caso una funcion antes de Create Product y los middleware son funciones que se ejecutan en el medio del fluijo de solicitud y respuesta de una app web y pueden realizar diversas tareas, como autenticacion, validacion de datos, registro de solicitudes, compresion de respuestas entre otras.
+
+En el medio de la ejecucion entre una accion y la otra y forman parte de una solicitud HTTP
+
+Esenciales para la creacion de app web robustas y flexibles. Cada solicitud HTTP pasa a traves de una serie de middlewares antes de llegar a la funcion de controlador que maneja la solicitud final.
+Permite modulzarizar y organizar el codigo de manera efectiva, ya que puedes agregar o quitar middlewares segun las necesidades de tu app.
+
+
+No borrar public en la base de datos
+ 

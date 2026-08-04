@@ -1,10 +1,24 @@
 import {Router} from 'express' //importamos el router de express para poder manejar las rutas de nuestra aplicacion
-import { createProduct } from './handlers/product'
-import {body, validationResult} from "express-validator";  //body se usa para validar los campos en el router que no es asincrona y 
+import { createProduct, getProducts, getProductById } from './handlers/product'
+import {body, param} from "express-validator";  //body se usa para validar los campos en el router que no es asincrona y 
+import { handleInputErrors } from './middleware';
+
+
+
+
 const router = Router() //de esta manera podemos crear un router para manejar las rutas de nuestra aplicacion
-router.get('/', (req, res) => { 
-    res.json('Desde GET')
-}) 
+
+
+
+
+router.get('/', getProducts) //aqui estamos usando la funcion getProducts que creamos en handlers/product.ts para manejar la peticion GET 
+router.get('/:id', 
+    param("id").isInt().withMessage("Id del producto no válido"),
+    handleInputErrors,
+    getProductById) //lo que habilita el :id es que podemos pasarle un parametro a la ruta, en este caso el id del producto, se envia a traves de la url
+
+
+
 router.post('/', 
     //VALIDACION EN EL ROUTER
     body("name").notEmpty().withMessage("El nombre del producto no puede ir vacio"),//con esto validamos que el nombre del producto no este vacio, y si lo esta le enviamos un mensaje de error al cliente
@@ -13,9 +27,14 @@ router.post('/',
             .notEmpty().withMessage("El precio del producto no puede ir vacio")
             .custom(value => value > 0).withMessage("El precio del producto debe ser un número positivo"),
     
+    handleInputErrors, //Este handleInputErrors se encarga de manejar los errores, si pasa esta funcion intermedia, entonces se ejecuta la funcion createProduct
     createProduct) //aqui estamos usando la funcion createProduct que creamos en handlers/product.ts para manejar la peticion POST
 
-router.put('/', (req, res) => { 
+
+
+
+
+    router.put('/', (req, res) => { 
     res.json('Desde PUT')
 })
 router.patch('/', (req, res) => { 

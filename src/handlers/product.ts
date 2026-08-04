@@ -2,7 +2,48 @@
 import { Request, Response } from "express"; //importamos los tipos de express para poder usarlos en nuestra aplicacion
 // import {check, validationResult} from "express-validator";  check se usa en funciones asincronas y validationResult se usa para obtener los errores de validacion que se generen en la funcion asincrona
 import Product from "../models/Product.model";
-import {validationResult} from "express-validator";
+
+
+export const getProducts = async (req: Request, res : Response) => { 
+    try {
+        const products = await Product.findAll({
+            order: [
+                ['id', 'DESC'] //ordenamos los productos por id de manera descendente
+            ],
+            attributes:{exclude: ['createdAt', 'updatedAt']} //excluimos los campos de fecha de creación y actualización
+            //esto excluye esos atributos de la respuesta que le enviamos al cliente
+            // limit: 10 //limitamos la cantidad de productos que vamos a obtener de la base de datos a 1
+        }) //con esto obtenemos todos los productos de la base de datos
+        res.json({ data: products })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const getProductById = async (req: Request, res : Response) => { 
+    try {
+        // console.log(req.params.id) //con esto podemos ver en la consola el id que nos envia el cliente en la url de la peticion
+       
+       
+        const { id } = req.params //con esto obtenemos el id que nos envia el cliente
+        
+        const product = await Product.findByPk(+id) //con esto obtenemos el producto de la base de datos que tiene el id que nos envia el cliente
+        //se pone un + porque el id que se envia desde la url es un string
+        
+        if(!product){
+            return res.status(404).json({ error: "Producto No Encontrado" })
+        }
+
+        
+        res.json({ data: product })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 export const createProduct = async (req: Request, res: Response) => {
 
     // console.log(req.body) //con esto podemos ver en la consola lo que nos envia el cliente en el body de la peticion
@@ -26,13 +67,16 @@ export const createProduct = async (req: Request, res: Response) => {
     //     return res.status(400).json({errors: errors.array()}) //si hay errores le enviamos al cliente un status 400 
     // }
 
-    let errors = validationResult(req)
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() }) //si hay errores le enviamos al cliente un status 400 
-    }
+    try {
+        const product = await Product.create(req.body)
+        res.json({ data: product }) //con esto le enviamos al cliente el producto que acabamos de crear, para que pueda ver los datos que se guardaron
 
-    const product = await Product.create(req.body)
-    res.json({ data: product }) //con esto le enviamos al cliente el producto que acabamos de crear, para que pueda ver los datos que se guardaron
+    } catch (error) {
+        console.error(error)
+    }
+    //Va a dar un error en caso de que puede haber una conexion erronea a la base de datos, o que el cliente nos envie un body vacio, o que el cliente nos envie un body con un precio negativo, o que el cliente nos envie un body con un precio que no sea un numero, o que el cliente nos envie un body con un nombre vacio, o que el cliente nos envie un body con un nombre que ya exista en la base de datos, etc.
+
+
 }
 
 //debe ser asincrona porque vamos a hacer una peticion a la base de datos, y eso puede tardar un tiempo

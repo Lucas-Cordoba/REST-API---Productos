@@ -44,3 +44,6 @@ server.use('/api/products', router)//es para decirle a nuestro server que use el
 
 //Nuestro navegador solo admite GET y POST, para poder usar los otros metodos HTTP necesitamos axios o fetch,  usar un cliente como Postman o Thunder Client
 export default server;
+
+
+//los server.use son middlewares
