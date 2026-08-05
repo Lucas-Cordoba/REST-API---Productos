@@ -80,3 +80,66 @@ export const createProduct = async (req: Request, res: Response) => {
 }
 
 //debe ser asincrona porque vamos a hacer una peticion a la base de datos, y eso puede tardar un tiempo
+
+
+export const updateProduct = async (req: Request, res: Response) => { 
+    const { id } = req.params
+        
+    const product = await Product.findByPk(+id) 
+        
+    if(!product){
+        return res.status(404).json({ error: "Producto No Encontrado" })
+    }
+    //Con todo este codigo estamos validando que el producto exista en la base de datos antes de actualizarlo, si no existe le enviamos un error al cliente
+
+
+    
+    // console.log(req.body) //con esto podemos ver en la consola lo que nos envia el cliente
+    
+
+
+    //Actualizar
+    await product.update(req.body) //Hace modificaciones parciales,con esto actualizamos el producto con los datos que nos envia el cliente, y si no le enviamos algun dato, entonces se mantiene el dato que ya tenia el producto 
+    await product.save()
+    
+    res.json({ data: product })
+}
+
+export const updateAvalability = async (req: Request, res: Response) => { 
+    const { id } = req.params
+    const product = await Product.findByPk(+id) 
+        
+    if(!product){
+        return res.status(404).json({ error: "Producto No Encontrado" })
+    }
+    //Con todo este codigo estamos validando que el producto exista en la base de datos antes de actualizarlo, si no existe le enviamos un error al cliente
+
+
+    
+    // console.log(req.body) //con esto podemos ver en la consola lo que nos envia el cliente
+    
+
+    //Actualizar
+    await product.update(req.body) //Hace modificaciones parciales,con esto actualizamos el producto con los datos que nos envia el cliente, y si no le enviamos algun dato, entonces se mantiene el dato que ya tenia el producto 
+    await product.save()
+    
+    console.log(product.dataValues) //con dataValues podemos leer los datos del producto que acabamos de actualizar
+    res.json({ data: product })
+}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const product = await Product.findByPk(+id) 
+        
+    if(!product){
+        return res.status(404).json({ error: "Producto No Encontrado" })
+    }
+
+    //Eliminar
+    await product.destroy() //con esto eliminamos el producto de la base de datos
+    //Lo que hacen mucho es poner una columna mas en la base de datos con 1/0 si tiene true esat 1 y si tiene 0 no es visible y lo que hacemos es cambiarle el estado, porque en algunos proyectos esta prohibido eliminar  
+    
+    
+    await product.save() //con esto guardamos los cambios en la base de datos
+    res.json({ data: `Producto ${product.dataValues.name} eliminado` }) 
+}

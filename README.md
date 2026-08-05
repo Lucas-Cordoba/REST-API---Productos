@@ -172,3 +172,98 @@ Permite modulzarizar y organizar el codigo de manera efectiva, ya que puedes agr
 
 No borrar public en la base de datos
  
+
+ El PUT/PATCH, es para actualizar y es basicamente tomar un producto y actualizarlo
+
+ Cuando trabajamos con PUT tenemos que actualizar todo en este codigo actualizamos con .update(req.body) para no tener ningun error y protegernos, solo actualiza lo que le enviemos.
+
+ PUT reemplaza el elemento con lo que le envies.
+ por ejemplo si envio 
+
+ product.availability = req.body.
+ availability me reemplaza todo con lo que le madne y osea lo que envio vacio me lo reemplaza por vacio
+
+{
+  "name": ,
+  "price": ,
+  "availability": true
+}
+
+ En cambio PATCH reemplaza solo el elemento que le envia el cliente y deja el resto como esta
+
+ en cambio patch si le envio 
+ product.availability = req.body.
+ availability 
+
+ y devuelve 
+ 
+ {
+  "name": "Monitor Actualizado",
+  "price": 5000,
+  "availability": nuevo valor actualizado
+}
+
+
+
+PUT Y PATCH cuando utilizar cada uno 
+
+PUT (Actualiza completamente)
+
+Reemplaza o actualiza completamente un recurso existente en un servidor web.
+Cuando haces una solicitud PUT, estás diciendo al servidor que tome la información proporcionada y la utilice para reemplazar completamente el recurso en la ubicación especificada.
+
+PATCH (MODIFICA)
+
+Se utiliza para realizar modificaciones parciales en un recurso existente en un servidor web.
+En lugar de reemplazar completamente el recurso, como lo hace PUT, PATCH permite realizar cambios específicos en los datos del recurso sin afectar el resto de la información.
+   
+
+
+Se pueden ir haciendo pruebas a los diferentes endpoint con Postman o thunder client pero vamos a hacer pruebas unitarias y de integracion
+
+Testing
+Para APIS no es muy diferente que aplicar testing a aplicaciones de React
+
+Siempre debe haber pruebas y en muchos trabajos el codigo debe ir acompañado de Testing.
+Mientras mas exhaustivas sean las pruebas mejor es.
+
+Tipos de Testing que se agregan en Node.js y API's
+
+Unit Testing: Verificar que partes individuales en nuestro código funcionen; tales como crear el servidor, visitar una ruta, debemos revisar que cada pieza funcione como esperamos antes de integrarla
+con otras.
+
+Integration Testing: Una vez que revisamos que algunas piezas de código funcionen por si solas, es momento de revisar cuando 2 o más se unen, tales como visitar una ruta y obtener datos, o enviar una petición post, validar, y entonces crear el producto.
+
+Jest
+
+Uno de lo frameworks para aplicar testing más conocidos hoy en día, funciona con TypeScript, Node.js, React, Angular y Vue.js
+La configuración es muy simple, los test corren aparte y no se mezclan con el código existente.
+
+SuperTest
+
+Jest nos da una serie de funciones para probar el código, pero con l supertest podremos realizar peticiones hacia nuestra API y revisar que el código funcione como esperamos.
+Con supertest podremos realizar pruebas te integración entre las
+URL's de nuestra API y el ORM.
+
+
+dependencias son de desarrollo en nuevas versiones
+
+npm i -D supertest @types/supertest
+npm i jest @types/jest ts-jest--legacy-peer-deps
+npm i -D typescript@5 --save-exact
+
+
+ts-jest permitir que Jest entienda, transpile y ejecute pruebas unitarias escritas en TypeScript sin necesidad de compilar manualmente todo el proyecto a JavaScript primero.
+
+se usa ts-jest--legacy-peer-deps porque la versión de TypeScript es más nueva que el rango que soporta oficialmente la versión de ts-jest
+
+npx ts-jest config:init es para inicializar un archivo de configruacion de ts-jest
+
+Extensiones para Jest
+
+Jest puede leer archivos de 3 formas:
+
+    -Archivos con la extensión .test.js
+    -Archivos con la extensión .spec.js
+    -Archivos dentro de la carpeta __tests__
+

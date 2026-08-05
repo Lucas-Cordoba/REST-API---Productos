@@ -4,7 +4,7 @@ import {validationResult} from "express-validator";
 export const handleInputErrors = (req : Request, res : Response, next : NextFunction) => {
     
     
-    let errors = validationResult(req)
+    let errors = validationResult(req) //recopila el resultado de las validaciones que ejecutaste previamente en la ruta o en el middleware
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() }) //si hay errores le enviamos al cliente un status 400 
     }
