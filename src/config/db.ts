@@ -7,7 +7,7 @@ const db = new Sequelize(process.env.DATABASE_URL!,{
 
   models: [__dirname + '/../models/*.model.ts'], //esto es para decirle a sequelize que busque los modelos en la carpeta models, y que los cargue automaticamente, para poder usarlos en nuestra aplicacion
   //dirname es una variable que nos da la ruta absoluta de la carpeta donde estamos, y con eso le decimos a sequelize que busque los modelos en la carpeta models, y que los cargue automaticamente
-
+  logging: false, //esto es para decirle a sequelize que no nos muestre los logs de las consultas que hace a la base de datos
   
 }//,{
     // dialectOptions:{ //son las opciones que le pasamos a la base de datos para poder conectarnos a ella

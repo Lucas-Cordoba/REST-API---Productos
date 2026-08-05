@@ -8,7 +8,7 @@ async function connectDB() {
     try{
         await db.authenticate() //con esto nos conectamos a la base de datos
         db.sync() //con esto sincronizamos la base de datos, es decir, creamos las tablas si no existen
-        console.log(colors.blue.bold("Conexion exitosa a la base de datos"))
+        // console.log(colors.blue.bold("Conexion exitosa a la base de datos"))
     }catch(error){
         // console.log(error)
         console.log(colors.bgRed.bold("No se pudo conectar a la base de datos"))
@@ -22,7 +22,20 @@ const server = express(); //sobre este server se van a crear las rutas y los mid
 
 //Leer datos de formularios
 server.use(express.json()) //con esto le decimos a express que vamos a recibir datos en formato json
-server.use('/api/products', router)//es para decirle a nuestro server que use el router que creamos en router.ts para manejar las rutas de nuestra aplicacion
+server.use('/api/products', router)//nmo es muy flexible, es para decirle a nuestro server que use el router que creamos en router.ts para manejar las rutas de nuestra aplicacion
+
+
+server.get('/api', (req, res) =>{
+    res.json({msg:'Desde API'})
+})
+
+
+
+
+
+
+
+
 //Routing
 // server.post('/', (req, res) => {  //req es la peticion que hace el cliente y res es la respuesta que le vamos a dar
 

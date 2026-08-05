@@ -69,8 +69,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
     try {
         const product = await Product.create(req.body)
-        res.json({ data: product }) //con esto le enviamos al cliente el producto que acabamos de crear, para que pueda ver los datos que se guardaron
-
+        res.status(201).json({ data: product }) //con esto le enviamos al cliente el estado y el json que enviamos, 201 codigo OK de creado
     } catch (error) {
         console.error(error)
     }

@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "tsx --watch src/index.ts",
     "_comment": "Esto es para que el servidor se reinicie cada vez que hago cambios",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --forceExit",
+    "_comment2": "Esto es para que jest no se quede colgado y cierre el proceso cuando termina de correr los tests"
+    
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

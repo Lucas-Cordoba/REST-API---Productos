@@ -13,3 +13,31 @@
 
 // }) //esta funcion no se importa de ningun lado es de jest y esta de forma global
 
+
+import request from "supertest"; //Nos permite hacer peticiones a un determinado endpoint, es decir, nos permite hacer pruebas a nuestro servidor
+import server from "../server"; //importamos nuestro servidor para poder hacer pruebas a nuestro servidor
+import db from "../config/db";
+
+describe ('GET /api', () => {
+    test('debería devolver una respuesta JSON / should send back a json response', async () => {
+        const res = await request(server).get('/api') //hacemos una peticion get a nuestro servidor
+        
+        expect(res.status).toBe(200) //esperamos que el status de la respuesta sea 200, es decir, que la peticion haya sido exitosa
+        expect(res.headers['content-type']).toMatch(/json/)  //Sirve para confirmar que la API o endpoint está respondiendo adecuadamente en formato JSON
+        expect(res.body.msg).toBe('Desde API') //se fija que lo que hay en msg sea  Desde API
+        //Esto es para acceder al contenido
+        // console.log(res.text)
+        // console.log(res.body.msg) //este me permite acceder a msg o contenido en este caso res.body.msg y no marca error .text si marca error
+    
+        expect(res.status).not.toBe(404) //esto indica que el estado de res no debe ser 404
+        expect(res.body.msg).not.toBe('desde api') //esto indica que el estado de res no debe ser 404
+    
+    } )
+})
+
+
+afterAll(async () => {
+    await db.close(); //cerramos la conexion a la base de datos despues de todas las pruebas
+
+    
+})

@@ -267,3 +267,14 @@ Jest puede leer archivos de 3 formas:
     -Archivos con la extensión .spec.js
     -Archivos dentro de la carpeta __tests__
 
+
+Supertest puede realizar consultas externas hacia nuestros endpoints
+
+ponerle el mimso nombre a los archivos test que los archivos del codigo
+
+
+Se recomienda tener una base de datos de prueba y una de produccion, la de prueba usamos para aplicar testing y nuevas funcionalidades hasta probar que funcione bien
+
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status 
+pagina para ver los codigo que vamos a usar ejemplo 200 es OK y 404 No encontrado como por ejemplo una URL mal puesta o que no existe
