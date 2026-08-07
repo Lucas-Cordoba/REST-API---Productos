@@ -42,7 +42,7 @@ router.put('/:id',
         .isNumeric().withMessage("El precio del producto debe ser un número")
         .notEmpty().withMessage("El precio del producto no puede ir vacio")
         .custom(value => value > 0).withMessage("El precio del producto debe ser un número positivo"),
-    body('availabilty')
+    body('availability')
         .isBoolean().withMessage("El campo de disponibilidad no es válido"),
     handleInputErrors,
     updateProduct) //PUT hace modificaciones completas de un recurso, es decir, si el cliente envia un objeto con todos los campos del producto, entonces se actualiza el producto completo, si el cliente envia un objeto con algunos campos del producto, entonces se actualiza solo esos campos. Se usa para actualizar un recurso completo
