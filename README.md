@@ -278,3 +278,48 @@ Se recomienda tener una base de datos de prueba y una de produccion, la de prueb
 
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status 
 pagina para ver los codigo que vamos a usar ejemplo 200 es OK y 404 No encontrado como por ejemplo una URL mal puesta o que no existe
+
+
+Code Coverage 
+
+El "code coverage" (cobertura de código) es una métrica utilizada para medir la cantidad de código fuente que ha sido ejecutado o
+cubierto por un conjunto de pruebas.
+En otras palabras, mide qué porcentaje del código de un programa ha sido probado. Cuanto mayor sea la cobertura de código, más exhaustivas son las pruebas, lo que a menudo se considera un indicador positivo de la calidad del software.
+
+Metricas
+
+Cuales son aceptables, cuales no y cuales son imposibles
+
+-Menos de 60% No es Suficiente vamos a tener que agregar algunas pruebas adicionales para llegar a 60 y 80%
+-60% y 80% Se pueden mejorar, se podria ver si se pueden agregar algunas adicionales
+- Mas del 80% es suficiente y es un buen numero, y es un buen indicativo de la calidad del software
+-Tener el 100% es lo ideal pero poco probable, se deben escribir demasiadas pruebas
+
+No todo hay que probarlo
+
+un MOCK se refiere a una tecnica para las pruebas para simular el comportamiento de ciertos modulo, funciones u objetos en este entorno
+
+Hay que preguntar si para testear las apps tienen code coverage y cual es el porcentaje de metricas
+
+Documentacion de API's
+
+ La documentación de una API es contenido técnico que describe una
+API a detalle.
+Incluye instrucciones sobre como utilizar una API de forma correcta como son endpoints soportados, tipos de petición, que valores
+soporta y mas.
+Una vez que una API es publicada, la documentación se asegura que otras herramientas (internas o externas) sepan que se puede hacer y como utilizarla
+
+Porque documentar
+La principal es para que sea utilizada de forma correcta
+Mayor adopcion, una buena documentacion hara que sea claro que funcionalidad hay disponible y los usuarios podran sacar maximo provecho
+Reduce costos de soporte
+
+Uitilizamos swagger
+
+npm i swagger-jsdoc swagger-ui-express
+
+ swagger-jsdoc: Lee las anotaciones/comentarios (formato JSDoc/YAML) que escribes directamente arriba de tus rutas en el código y las convierte en una especificación estándar
+
+ swagger-ui-express: Toma ese objeto/JSON generado y crea automáticamente una interfaz gráfica interactiva (usualmente alojada en /api-docs) donde cualquier desarrollador puede ver los endpoints disponibles
+
+ npm i -D @types/swagger-jsdoc swagger-jsdoc @types/swagger-ui-express swagger-ui-express estas son para tener soporte de TypeScript

@@ -6,8 +6,9 @@
         "rootDir": "./src", //Le decimos que la carpeta raiz de nuestro proyecto es src, y que todo lo que este dentro de src va a ser compilado
         "lib": ["esnext"], //Le decimos que queremos que compile con la version de JS mas nueva
         "target": "ESNext", //este target sirve para decirle a typescript que queremos que compile nuestro codigo a una version de JS mas antigua, en este caso ES3, esto es para que nuestro codigo sea compatible con navegadores antiguos
-        "moduleResolution": "node", //moduleResolution es una opcion que le dice a typescript como va a resolver los modulos
-        "module": "NodeNext", 
+        "moduleResolution": "NodeNext", //moduleResolution es una opcion que le dice a typescript como va a resolver los modulos
+        "module": "NodeNext",
+        "isolatedModules": true, 
         "strict": false, //Le decimos que no queremos que compile con todas las reglas estrictas de typescript
         //le ponemos false para que nos permita compilar sin que nos de errores, ya que si lo ponemos en true nos va a dar muchos errores y no vamos a poder compilar 
         "sourceMap": true, //Le decimos que queremos que genere los archivos .map

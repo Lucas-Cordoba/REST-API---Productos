@@ -1,10 +1,12 @@
 import express from "express";
 import colors from "colors";
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec, {swaggerUiOptions} from "./config/swagger";
 import router from "./router";
 import db from "./config/db";
 
 //Conexion a la base de datos
-async function connectDB() {
+export async function connectDB() {
     try{
         await db.authenticate() //con esto nos conectamos a la base de datos
         db.sync() //con esto sincronizamos la base de datos, es decir, creamos las tablas si no existen
@@ -24,13 +26,9 @@ const server = express(); //sobre este server se van a crear las rutas y los mid
 server.use(express.json()) //con esto le decimos a express que vamos a recibir datos en formato json
 server.use('/api/products', router)//nmo es muy flexible, es para decirle a nuestro server que use el router que creamos en router.ts para manejar las rutas de nuestra aplicacion
 
+//DOCS
 
-server.get('/api', (req, res) =>{
-    res.json({msg:'Desde API'})
-})
-
-
-
+server.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions)) //nos da el cliente Express y nos da una url para la docs, y le pasamos el Spec que es la documentacion
 
 
 
