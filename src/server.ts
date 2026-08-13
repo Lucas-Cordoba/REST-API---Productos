@@ -16,6 +16,7 @@ export async function connectDB() {
     }catch(error){
         // console.log(error)
         console.log(colors.bgRed.bold("No se pudo conectar a la base de datos"))
+        console.error(error);
     }
 }
 
