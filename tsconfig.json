@@ -19,6 +19,7 @@
         
     },
     "include": [ "./src/**/*.ts"], //Le decimos que queremos que compile todos los archivos .ts que esten dentro de la carpeta src y sus subcarpetas
+    "exclude" :["src/**/*.test.ts"]
 }
 
 //De esta forma ya tenemos listo nuestro tsconfig.json para que compile nuestro proyecto de typescript a javascript.

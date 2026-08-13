@@ -7,6 +7,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx --watch src/index.ts",
+    "build": "tsc",
     "_comment": "Esto es para que el servidor se reinicie cada vez que hago cambios",
     "test": "jest --detectOpenHandles --forceExit",
     "test:coverage": "npm run pretest && jest --detectOpenHandles --coverage",
