@@ -125,7 +125,8 @@ export const updateAvalability = async (req: Request, res: Response) => {
 
 
     //Actualizar
-    await product.update(req.body) //Hace modificaciones parciales,con esto actualizamos el producto con los datos que nos envia el cliente, y si no le enviamos algun dato, entonces se mantiene el dato que ya tenia el producto 
+    product.availability = !product.dataValues.availability //Hace modificaciones parciales,con esto actualizamos el producto con los datos que nos envia el cliente, y si no le enviamos algun dato, entonces se mantiene el dato que ya tenia el producto 
+    //en el patch si o si debe ser asi el cambio porqye actualiza un solo campo
     await product.save()
 
     console.log(product.dataValues) //con dataValues podemos leer los datos del producto que acabamos de actualizar
